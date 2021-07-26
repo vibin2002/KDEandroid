@@ -18,7 +18,9 @@ class MainRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: EmployeeViewHolder, position: Int) {
-        holder.bindItems(employeeList[position])
+        holder.tvname.text = employeeList[position].name
+        holder.tvid.text = employeeList[position].id.toString()
+        holder.progressBar.progress = employeeList[position].progress
     }
 
     override fun getItemCount() = employeeList.size
@@ -27,10 +29,6 @@ class MainRecyclerAdapter(
         val tvid = view.findViewById(R.id.tv_eid) as TextView
         val tvname = view.findViewById(R.id.tv_ename) as TextView
         val progressBar = view.findViewById(R.id.stats_progressbar) as ProgressBar
-        fun bindItems(employee: Employee){
-            tvid.text = employee.id.toString()
-            tvname.text = employee.name
-            progressBar.progress = employee.progress
-        }
+
     }
 }
