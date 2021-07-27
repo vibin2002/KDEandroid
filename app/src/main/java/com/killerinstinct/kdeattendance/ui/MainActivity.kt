@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.killerinstinct.kdeattendance.*
 import com.killerinstinct.kdeattendance.adapters.MainRecyclerAdapter
 import com.killerinstinct.kdeattendance.localdb.KDEdatabase
+import com.killerinstinct.kdeattendance.models.Employee
 import com.killerinstinct.kdeattendance.repository.MainRepository
 import com.killerinstinct.kdeattendance.viewmodels.MainViewModel
 import com.killerinstinct.kdeattendance.viewmodels.MainViewModelProviderFactory
@@ -37,31 +38,28 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, TakeAttendanceActivity::class.java)
             startActivity(i)
         }
-        val recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview)
-        val linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.apply {
-            adapter = MainRecyclerAdapter(Utils.employeeList)
-            layoutManager = linearLayoutManager
-        }
-
 
         findViewById<CardView>(R.id.btn_add_employee).setOnClickListener {
-
-
-
             CoroutineScope(Dispatchers.IO).launch {
-                KDEdatabase(applicationContext).employeeDao().addEmployee(Utils.employeeList[1])
+                viewModel.addEmployee(Employee("Jon Snow","ABC"))
             }
+            setupRecyclerView()
         }
+        setupRecyclerView()
+
+    }
+
+
+    fun setupRecyclerView(){
+        val recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview)
+        val linearLayoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = linearLayoutManager
 
         val kdEdatabase = KDEdatabase(this)
-        findViewById<TextView>(R.id.textView).setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val list = kdEdatabase.employeeDao().getAllEmployees()
-                Log.d("WandaVision", list.toString())
-            }
-
-
+        CoroutineScope(Dispatchers.IO).launch {
+            val list = kdEdatabase.employeeDao().getAllEmployees()
+            recyclerView.adapter = MainRecyclerAdapter(list)
+            Log.d("WandaVision", list.toString())
         }
     }
 }
