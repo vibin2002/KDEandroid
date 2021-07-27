@@ -1,13 +1,12 @@
-package com.killerinstinct.kdeattendance
+package com.killerinstinct.kdeattendance.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.killerinstinct.kdeattendance.models.Attendand
+import com.killerinstinct.kdeattendance.R
 
 class TakeAttendanceRecAdapter (
     private val AttendantList: List<Attendand>
