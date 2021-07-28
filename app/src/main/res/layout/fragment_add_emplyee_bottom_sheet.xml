@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/bottomsheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+
     style="@style/Animation.Design.BottomSheetDialog"
     tools:context=".ui.AddEmployeeBottomSheet">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <EditText
@@ -22,14 +25,17 @@
             android:layout_margin="8dp"
             android:background="@android:color/transparent"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Spinner
                 android:layout_marginHorizontal="8dp"
+                android:id="@+id/category_spinner"
                 android:layout_width="0dp"
+                android:gravity="fill"
+                android:layout_weight="2"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_add"
@@ -38,7 +44,9 @@
 
             <Button
                 android:id="@+id/btn_add"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
+                android:gravity="fill"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:text="Add"
@@ -47,10 +55,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
 
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>

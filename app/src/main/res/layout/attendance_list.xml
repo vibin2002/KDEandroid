@@ -1,59 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="60dp"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:id="@+id/attendance_cardview"
-    android:layout_marginBottom="15dp"
-    android:layout_marginStart="25dp"
-    android:layout_marginEnd="25dp"
-app:cardCornerRadius="15dp">
+<!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="60dp"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--android:id="@+id/attendance_cardview"-->
+<!--    android:layout_marginBottom="15dp"-->
+<!--    android:layout_marginStart="25dp"-->
+<!--    android:layout_marginEnd="25dp"-->
+<!--app:cardCornerRadius="15dp">-->
 
-<RelativeLayout
+<!--<RelativeLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:backgroundTint="@android:color/transparent"-->
+<!--    android:layout_height="match_parent">-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@android:color/transparent"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:gravity="center"-->
+<!--            android:id="@+id/ID"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="1"-->
+<!--            android:textSize="20sp"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Santhiya"-->
+<!--            android:gravity="center"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="#000000"-->
+<!--            android:textSize="22sp" />-->
+
+
+
+
+<!--    </LinearLayout>-->
+<!--</RelativeLayout>-->
+
+
+
+
+<!--</androidx.cardview.widget.CardView>-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:backgroundTint="@android:color/transparent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="12dp"
+        android:paddingHorizontal="8dp"
+        android:text="1"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="12dp"
+        android:text="John Snow"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/check"
+        app:layout_constraintStart_toEndOf="@+id/ID"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/transparent"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:id="@+id/ID"
-            android:backgroundTint="@android:color/transparent"
-            android:textAlignment="center"
-            android:layout_marginStart="10dp"
-            android:text="1"
-            android:textSize="20sp"/>
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Santhiya"
-            android:gravity="center"
-            android:backgroundTint="@android:color/transparent"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="22sp" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:layout_marginRight="10dp"
-            android:id="@+id/check"
-            />
-
-
-    </LinearLayout>
-</RelativeLayout>
-
-
-
-
-</androidx.cardview.widget.CardView>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

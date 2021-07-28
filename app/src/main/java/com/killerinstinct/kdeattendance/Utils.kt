@@ -1,6 +1,8 @@
 package com.killerinstinct.kdeattendance
 
 import com.killerinstinct.kdeattendance.models.Attendand
+import com.killerinstinct.kdeattendance.localdb.KDEdatabase
+import com.killerinstinct.kdeattendance.localdb.EmployeeDao
 import com.killerinstinct.kdeattendance.models.Employee
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,7 +30,7 @@ object Utils {
         Employee("Dany","A")
     )
 
-    val attendance_list=listOf(
+    val attendance_list= listOf(
         Attendand(3,"John Snow","A"),
         Attendand(4,"John Snow","A"),
         Attendand(5,"Eddard Snow","B"),
