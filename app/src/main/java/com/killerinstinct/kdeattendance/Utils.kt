@@ -2,8 +2,19 @@ package com.killerinstinct.kdeattendance
 
 import com.killerinstinct.kdeattendance.models.Attendand
 import com.killerinstinct.kdeattendance.models.Employee
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Utils {
+    const val ALL_EMPLOYEES = "all_employees"
+    val currentDateAndTime: String = SimpleDateFormat("yyyyMMdd").format(Date())
+
+    val spinnerCategory = listOf(
+        "Welder",
+        "Cutter",
+        "Carpenter",
+        "Manager"
+    )
 
     val employeeList = listOf(
         Employee("John snow","A"),
