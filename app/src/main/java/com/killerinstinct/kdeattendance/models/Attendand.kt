@@ -9,6 +9,6 @@ data class Attendand(
     @PrimaryKey
     val id:Int,
     val name:String,
-    val category: String
-
+    val category: String,
+    val isPresent: Boolean = false
 )

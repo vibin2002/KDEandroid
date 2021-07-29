@@ -10,7 +10,7 @@ import com.killerinstinct.kdeattendance.models.Employee
 import com.killerinstinct.kdeattendance.R
 
 class MainRecyclerAdapter(
-    private val employeeList: List<Employee>
+    private var employeeList: List<Employee>
 ): RecyclerView.Adapter<MainRecyclerAdapter.EmployeeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
@@ -21,11 +21,15 @@ class MainRecyclerAdapter(
 
     override fun onBindViewHolder(holder: EmployeeViewHolder, position: Int) {
         holder.tvname.text = employeeList[position].name
-        holder.tvid.text = employeeList[position].id.toString()
+        holder.tvid.text = (position+1).toString()
         holder.tvcategory.text = employeeList[position].category
     }
 
     override fun getItemCount() = employeeList.size
+
+    fun getEmployee(position: Int): Int{
+        return employeeList[position].id
+    }
 
     inner class EmployeeViewHolder(view: View): RecyclerView.ViewHolder(view){
         val tvid = view.findViewById(R.id.tv_eid) as TextView

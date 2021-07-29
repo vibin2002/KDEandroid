@@ -66,6 +66,7 @@ class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
                     viewModel.addEmployee(employee)
                     Toast.makeText(requireContext(), "Employee Added", Toast.LENGTH_SHORT).show()
                     editText.text.clear()
+                    viewModel.getAllEmployees()
                 }
             } else {
                 Toast.makeText(requireContext(), "Enter valid name", Toast.LENGTH_SHORT).show()
@@ -80,13 +81,8 @@ class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
         return inflater.inflate(R.layout.fragment_add_emplyee_bottom_sheet, container, false)
     }
 
-    override fun onCancel(dialog: DialogInterface) {
-        super.onCancel(dialog)
-        (activity as MainActivity).setupRecyclerView()
-    }
-}
-
-
-interface SetupRVonBSDismiss {
-    fun updateRecyclerView()
+//    override fun onCancel(dialog: DialogInterface) {
+//        super.onCancel(dialog)
+//        (activity as MainActivity).setupRecyclerView(viewModel.employeeListLiveData.value)
+//    }
 }

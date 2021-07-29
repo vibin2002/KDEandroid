@@ -38,7 +38,9 @@ class TakeAttendanceActivity : AppCompatActivity() {
 
         val kdEdatabase = KDEdatabase(this, Utils.ALL_EMPLOYEES)
         CoroutineScope(Dispatchers.Main).launch {
-            val list = kdEdatabase.employeeDao().getAllEmployees()
+            val list = kdEdatabase.employeeDao().getAllEmployees().sortedBy {
+                it.id
+            }
             recyclerView.adapter = MainRecyclerAdapter(list)
 
         }

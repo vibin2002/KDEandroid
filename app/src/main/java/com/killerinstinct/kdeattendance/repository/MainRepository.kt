@@ -9,4 +9,9 @@ class MainRepository(
 
     suspend fun addEmployee(employee: Employee) = database.employeeDao().addEmployee(employee)
 
+    suspend fun deleteEmployee(id: Int) {
+        database.employeeDao().deleteEmployee(id)
+    }
+
+    suspend fun getAllEmployees(): List<Employee> = database.employeeDao().getAllEmployees()
 }

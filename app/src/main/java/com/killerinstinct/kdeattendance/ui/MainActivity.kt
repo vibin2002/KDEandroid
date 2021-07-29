@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -29,17 +30,28 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(),SetupRVonBSDismiss {
+class MainActivity : AppCompatActivity() {
     private lateinit var fab: ExtendedFloatingActionButton
     private lateinit var viewModel: MainViewModel
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        recyclerView = findViewById(R.id.main_recyclerview)
+        setupRecyclerView()
+
+
         val mainRepository = MainRepository(KDEdatabase(this, Utils.ALL_EMPLOYEES))
         val viewModelProviderFactory = MainViewModelProviderFactory(mainRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(MainViewModel::class.java)
+
+        viewModel.employeeListLiveData.observe(this,{
+            recyclerView.adapter = MainRecyclerAdapter(it.sortedBy { employee ->
+                employee.id
+            })
+        })
 
         fab = findViewById(R.id.extendedFloatingActionButton)
         fab.setOnClickListener {
@@ -50,29 +62,34 @@ class MainActivity : AppCompatActivity(),SetupRVonBSDismiss {
         val bottomSheetDialog = AddEmployeeBottomSheet()
         findViewById<CardView>(R.id.btn_add_employee).setOnClickListener {
             bottomSheetDialog.show(supportFragmentManager, "MainActivity")
-            setupRecyclerView()
+//            setupRecyclerView()
         }
-        setupRecyclerView()
 
     }
 
 
-    internal fun setupRecyclerView() {
-        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        val recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview)
-        recyclerView.addItemDecoration(dividerItemDecoration)
-        val linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = linearLayoutManager
+    private fun setupRecyclerView() {
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val kdEdatabase = KDEdatabase(this, Utils.ALL_EMPLOYEES)
-        CoroutineScope(Dispatchers.Main).launch {
-            val list = kdEdatabase.employeeDao().getAllEmployees()
-            recyclerView.adapter = MainRecyclerAdapter(list)
-            Log.d("WandaVision", list.toString())
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.deleteEmployee(viewModel.employeeListLiveData.value!![viewHolder.adapterPosition].id)
+//                setupRecyclerView()
+                Toast.makeText(this@MainActivity, "Removed", Toast.LENGTH_SHORT).show()
+            }
+
         }
+        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
     }
 
-    override fun updateRecyclerView() {
-        setupRecyclerView()
-    }
+
 }
