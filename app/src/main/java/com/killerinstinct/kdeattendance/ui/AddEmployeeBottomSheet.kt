@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -34,43 +31,48 @@ class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogStyle)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle)
 
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
         super.onViewCreated(view, savedInstanceState)
 
         //spinner code
-        val spinner=view.findViewById<Spinner>(R.id.category_spinner)
-        if (spinner!=null)
-        {
-            val adapter=ArrayAdapter(dialog!!.context,android.R.layout.simple_spinner_item,Utils.spinnerCategory)
-            spinner.adapter=adapter
+        val spinner = view.findViewById<Spinner>(R.id.category_spinner)
+        if (spinner != null) {
+            val adapter = ArrayAdapter(
+                dialog!!.context,
+                android.R.layout.simple_spinner_item,
+                Utils.spinnerCategory
+            )
+            spinner.adapter = adapter
         }
 
 
-
-        val mainRepository = MainRepository(KDEdatabase(requireActivity(),Utils.ALL_EMPLOYEES))
+        val mainRepository = MainRepository(KDEdatabase(requireActivity(), Utils.ALL_EMPLOYEES))
         val viewModelProviderFactory = MainViewModelProviderFactory(mainRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(MainViewModel::class.java)
 
-        view.findViewById<Button>(R.id.btn_add)?.setOnClickListener {
-            val spinnerPos:Int=spinner.selectedItemPosition
-            val employeelist = view.findViewById<EditText>(R.id.et_addemployee)?.text?.split("\n")
-            if (employeelist != null) {
-                for (i in employeelist.indices){
-                    val employee = Employee(employeelist[i],Utils.spinnerCategory[spinnerPos])
-                    CoroutineScope(Dispatchers.IO).launch {
-                        viewModel.addEmployee(employee)
-                    }
+        val editText = view.findViewById<EditText>(R.id.et_addemployee)
+        val addbtn = view.findViewById<Button>(R.id.btn_add)
+
+        addbtn.setOnClickListener {
+            val employeelist = editText.text?.split("\n")
+            if (employeelist != null && employeelist.isNotEmpty()) {
+                for (i in employeelist.indices) {
+                    val employee = Employee(employeelist[i], Utils.spinnerCategory[0])
+                    viewModel.addEmployee(employee)
+                    Toast.makeText(requireContext(), "Employee Added", Toast.LENGTH_SHORT).show()
+                    editText.text.clear()
                 }
+            } else {
+                Toast.makeText(requireContext(), "Enter valid name", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,8 +80,13 @@ class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
         return inflater.inflate(R.layout.fragment_add_emplyee_bottom_sheet, container, false)
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
+        (activity as MainActivity).setupRecyclerView()
     }
+}
+
+
+interface SetupRVonBSDismiss {
+    fun updateRecyclerView()
 }

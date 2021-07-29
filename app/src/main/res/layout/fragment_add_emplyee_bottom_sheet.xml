@@ -6,14 +6,13 @@
     android:layout_height="wrap_content"
     android:id="@+id/bottomsheet"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-
     style="@style/Animation.Design.BottomSheetDialog"
     tools:context=".ui.AddEmployeeBottomSheet">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical">
 
         <EditText
@@ -35,7 +34,7 @@
                 android:id="@+id/category_spinner"
                 android:layout_width="0dp"
                 android:gravity="fill"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_add"
@@ -45,11 +44,12 @@
             <Button
                 android:id="@+id/btn_add"
                 android:layout_width="0dp"
-                android:gravity="fill"
+                android:gravity="center"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:text="Add"
+                android:foreground="?attr/selectableItemBackground"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

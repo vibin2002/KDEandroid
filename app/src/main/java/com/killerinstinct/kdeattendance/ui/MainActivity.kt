@@ -29,7 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),SetupRVonBSDismiss {
     private lateinit var fab: ExtendedFloatingActionButton
     private lateinit var viewModel: MainViewModel
 
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun setupRecyclerView() {
+    internal fun setupRecyclerView() {
         val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val recyclerView = findViewById<RecyclerView>(R.id.main_recyclerview)
         recyclerView.addItemDecoration(dividerItemDecoration)
@@ -70,5 +70,9 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter = MainRecyclerAdapter(list)
             Log.d("WandaVision", list.toString())
         }
+    }
+
+    override fun updateRecyclerView() {
+        setupRecyclerView()
     }
 }
