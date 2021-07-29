@@ -1,15 +1,13 @@
 package com.killerinstinct.kdeattendance.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.killerinstinct.kdeattendance.R
 import com.killerinstinct.kdeattendance.Utils
 import com.killerinstinct.kdeattendance.adapters.MainRecyclerAdapter
-import com.killerinstinct.kdeattendance.adapters.TakeAttendanceRecAdapter
 import com.killerinstinct.kdeattendance.localdb.KDEdatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

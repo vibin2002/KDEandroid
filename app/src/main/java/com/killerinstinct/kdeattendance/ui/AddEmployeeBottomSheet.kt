@@ -1,16 +1,12 @@
 package com.killerinstinct.kdeattendance.ui
 
-import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.killerinstinct.kdeattendance.R
 import com.killerinstinct.kdeattendance.Utils
@@ -19,10 +15,6 @@ import com.killerinstinct.kdeattendance.models.Employee
 import com.killerinstinct.kdeattendance.repository.MainRepository
 import com.killerinstinct.kdeattendance.viewmodels.MainViewModel
 import com.killerinstinct.kdeattendance.viewmodels.MainViewModelProviderFactory
-import com.killerinstinct.kdeattendance.ui.MainActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
 
@@ -53,7 +45,7 @@ class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
 
         val mainRepository = MainRepository(KDEdatabase(requireActivity(), Utils.ALL_EMPLOYEES))
         val viewModelProviderFactory = MainViewModelProviderFactory(mainRepository)
-        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), viewModelProviderFactory).get(MainViewModel::class.java)
 
         val editText = view.findViewById<EditText>(R.id.et_addemployee)
         val addbtn = view.findViewById<Button>(R.id.btn_add)

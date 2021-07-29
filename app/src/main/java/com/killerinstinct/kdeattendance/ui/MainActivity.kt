@@ -1,34 +1,22 @@
 package com.killerinstinct.kdeattendance.ui
 
-import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.FrameLayout
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.killerinstinct.kdeattendance.*
 import com.killerinstinct.kdeattendance.adapters.MainRecyclerAdapter
 import com.killerinstinct.kdeattendance.localdb.KDEdatabase
-import com.killerinstinct.kdeattendance.models.Employee
 import com.killerinstinct.kdeattendance.repository.MainRepository
 import com.killerinstinct.kdeattendance.viewmodels.MainViewModel
 import com.killerinstinct.kdeattendance.viewmodels.MainViewModelProviderFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var fab: ExtendedFloatingActionButton
@@ -62,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         val bottomSheetDialog = AddEmployeeBottomSheet()
         findViewById<CardView>(R.id.btn_add_employee).setOnClickListener {
             bottomSheetDialog.show(supportFragmentManager, "MainActivity")
-//            setupRecyclerView()
         }
 
     }
@@ -83,7 +70,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 viewModel.deleteEmployee(viewModel.employeeListLiveData.value!![viewHolder.adapterPosition].id)
-//                setupRecyclerView()
                 Toast.makeText(this@MainActivity, "Removed", Toast.LENGTH_SHORT).show()
             }
 

@@ -7,11 +7,13 @@ class MainRepository(
     private val database: KDEdatabase
 ) {
 
-    suspend fun addEmployee(employee: Employee) = database.employeeDao().addEmployee(employee)
+    private val employeeDao = database.employeeDao()
+
+    suspend fun addEmployee(employee: Employee) = employeeDao.addEmployee(employee)
 
     suspend fun deleteEmployee(id: Int) {
-        database.employeeDao().deleteEmployee(id)
+        employeeDao.deleteEmployee(id)
     }
 
-    suspend fun getAllEmployees(): List<Employee> = database.employeeDao().getAllEmployees()
+    suspend fun getAllEmployees(): List<Employee> = employeeDao.getAllEmployees()
 }
