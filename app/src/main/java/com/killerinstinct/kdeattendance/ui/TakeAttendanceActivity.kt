@@ -1,10 +1,13 @@
 package com.killerinstinct.kdeattendance.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +20,8 @@ import com.killerinstinct.kdeattendance.models.Attendand
 import com.killerinstinct.kdeattendance.repository.MainRepository
 import com.killerinstinct.kdeattendance.viewmodels.TakeAttendanceVMProviderFactory
 import com.killerinstinct.kdeattendance.viewmodels.TakeAttendanceViewModel
+import java.io.File
+import java.io.FileOutputStream
 
 class TakeAttendanceActivity : AppCompatActivity() {
 
@@ -55,6 +60,32 @@ class TakeAttendanceActivity : AppCompatActivity() {
                 //it -> list of attendance to be saved
                 it.forEach { attendand ->
                     Log.d("KEDODA", "$attendand\n")
+                }
+
+                var string = ""
+                for (i in it.indices)
+                {
+                    string += "${it[i].name},${it[i].category},${it[i].isPresent}\n"
+                }
+
+                try {
+                    val fileOutputStream = openFileOutput("${Utils.getCurrentDateAndTime()}.csv",Context.MODE_PRIVATE)
+                    fileOutputStream.write(string.toByteArray())
+                    fileOutputStream.close()
+
+                    val file = File(filesDir,"${Utils.getCurrentDateAndTime()}.csv")
+                    val path = FileProvider.getUriForFile(this,"com.killerinstinct.kdeattendance.fileprovider",file)
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/csv"
+                        putExtra(Intent.EXTRA_SUBJECT,"Data")
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        putExtra(Intent.EXTRA_STREAM,path)
+                        startActivity(Intent.createChooser(this,"Send file"))
+                    }
+
+
+                }catch (e: Exception){
+                    e.printStackTrace()
                 }
             }
         })
