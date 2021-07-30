@@ -14,7 +14,7 @@ import com.killerinstinct.kdeattendance.localdb.KDEdatabase
 import com.killerinstinct.kdeattendance.models.Employee
 import com.killerinstinct.kdeattendance.repository.MainRepository
 import com.killerinstinct.kdeattendance.viewmodels.MainViewModel
-import com.killerinstinct.kdeattendance.viewmodels.MainViewModelProviderFactory
+import com.killerinstinct.kdeattendance.viewmodels.MainVMProviderFactory
 
 class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
 
@@ -44,7 +44,7 @@ class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
 
 
         val mainRepository = MainRepository(KDEdatabase(requireActivity(), Utils.ALL_EMPLOYEES))
-        val viewModelProviderFactory = MainViewModelProviderFactory(mainRepository)
+        val viewModelProviderFactory = MainVMProviderFactory(mainRepository)
         viewModel = ViewModelProvider(requireActivity(), viewModelProviderFactory).get(MainViewModel::class.java)
 
         val editText = view.findViewById<EditText>(R.id.et_addemployee)

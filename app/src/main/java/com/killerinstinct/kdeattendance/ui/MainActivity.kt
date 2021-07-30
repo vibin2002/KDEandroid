@@ -16,7 +16,7 @@ import com.killerinstinct.kdeattendance.adapters.MainRecyclerAdapter
 import com.killerinstinct.kdeattendance.localdb.KDEdatabase
 import com.killerinstinct.kdeattendance.repository.MainRepository
 import com.killerinstinct.kdeattendance.viewmodels.MainViewModel
-import com.killerinstinct.kdeattendance.viewmodels.MainViewModelProviderFactory
+import com.killerinstinct.kdeattendance.viewmodels.MainVMProviderFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var fab: ExtendedFloatingActionButton
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val mainRepository = MainRepository(KDEdatabase(this, Utils.ALL_EMPLOYEES))
-        val viewModelProviderFactory = MainViewModelProviderFactory(mainRepository)
+        val viewModelProviderFactory = MainVMProviderFactory(mainRepository)
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(MainViewModel::class.java)
 
         viewModel.employeeListLiveData.observe(this,{
