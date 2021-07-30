@@ -9,7 +9,7 @@ import java.util.*
 
 object Utils {
     const val ALL_EMPLOYEES = "all_employees"
-    val currentDateAndTime: String = SimpleDateFormat("yyyyMMdd").format(Date())
+    fun getCurrentDateAndTime(): String = SimpleDateFormat("yyyyMMdd").format(Date())
 
     val spinnerCategory = listOf(
         "Welder",

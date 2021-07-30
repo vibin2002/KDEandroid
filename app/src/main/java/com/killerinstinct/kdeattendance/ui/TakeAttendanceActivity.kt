@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.killerinstinct.kdeattendance.R
 import com.killerinstinct.kdeattendance.Utils
-import com.killerinstinct.kdeattendance.adapters.MainRecyclerAdapter
+import com.killerinstinct.kdeattendance.adapters.TakeAttendanceRecAdapter
 import com.killerinstinct.kdeattendance.localdb.KDEdatabase
+import com.killerinstinct.kdeattendance.models.Attendand
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,8 +39,10 @@ class TakeAttendanceActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val list = kdEdatabase.employeeDao().getAllEmployees().sortedBy {
                 it.id
+            }.map {
+                Attendand(it.id,it.name,it.category,false)
             }
-            recyclerView.adapter = MainRecyclerAdapter(list)
+            recyclerView.adapter = TakeAttendanceRecAdapter(list)
 
         }
     }
