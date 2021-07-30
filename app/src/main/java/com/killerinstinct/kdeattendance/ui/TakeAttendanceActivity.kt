@@ -1,6 +1,9 @@
 package com.killerinstinct.kdeattendance.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,7 +20,7 @@ import com.killerinstinct.kdeattendance.viewmodels.TakeAttendanceViewModel
 
 class TakeAttendanceActivity : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: TakeAttendanceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +40,23 @@ class TakeAttendanceActivity : AppCompatActivity() {
             }.map { emp ->
                 Attendand(emp.id,emp.name,emp.category,false)
             }
-            recyclerView.adapter = TakeAttendanceRecAdapter(attendantList)
+            recyclerView.adapter = TakeAttendanceRecAdapter(attendantList).also { attendance ->
+                findViewById<Button>(R.id.btn_finish).setOnClickListener {
+                    viewModel.attendance.postValue(attendance.getList())
+                }
+            }
+        })
+
+        viewModel.attendance.observe(this,{
+            if (it.isEmpty())
+                Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show()
+            else
+            {
+                //it -> list of attendance to be saved
+                it.forEach { attendand ->
+                    Log.d("KEDODA", "$attendand\n")
+                }
+            }
         })
 
     }

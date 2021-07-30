@@ -3,6 +3,7 @@ package com.killerinstinct.kdeattendance.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.killerinstinct.kdeattendance.models.Attendand
 import com.killerinstinct.kdeattendance.models.Employee
 import com.killerinstinct.kdeattendance.repository.MainRepository
 import kotlinx.coroutines.launch
@@ -12,6 +13,7 @@ class TakeAttendanceViewModel(
 ): ViewModel() {
 
     val employeeListLiveData = MutableLiveData<List<Employee>>()
+    val attendance = MutableLiveData<List<Attendand>>()
 
     init {
         getAllEmployees()

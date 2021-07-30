@@ -10,5 +10,5 @@ data class Attendand(
     val id:Int,
     val name:String,
     val category: String,
-    val isPresent: Boolean = false
+    var isPresent: Boolean = false
 )

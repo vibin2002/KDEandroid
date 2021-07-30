@@ -12,6 +12,12 @@
         android:layout_marginTop="25dp"
         android:id="@+id/TA_rec"/>
 
+    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_finish"/>
+
 
 
 </RelativeLayout>
