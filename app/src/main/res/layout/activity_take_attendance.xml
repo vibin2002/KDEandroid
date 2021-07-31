@@ -10,6 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/nunito"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="#7d7d7d"
+            android:textAlignment="center"
+            android:textSize="20dp" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,8 +30,14 @@
 
         <Button
             android:layout_centerHorizontal="true"
-            android:layout_width="match_parent"
-            android:text=""
+            android:layout_width="wrap_content"
+            android:text="Share"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/et_bg"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_height="wrap_content"
             android:id="@+id/btn_finish"/>
 

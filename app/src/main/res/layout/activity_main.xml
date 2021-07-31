@@ -24,7 +24,8 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent">
+                android:backgroundTint="#F3F3F3"
+                android:background="#F3F3F3">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -211,6 +212,8 @@
                 <CalendarView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@drawable/card_bg"
                     android:showWeekNumber="true"
                     android:soundEffectsEnabled="true" />
@@ -298,17 +301,19 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true">
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        <TextView
             android:id="@+id/extendedFloatingActionButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cornerRadius="15dp"
-            android:backgroundTint="@color/light_purple"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="18dp"
             android:layout_marginBottom="20dp"
             android:paddingRight="10dp"
+            android:textColor="@color/white"
             android:paddingLeft="10dp"
+            android:background="@drawable/btn_bg"
             android:text="Take attendance"
-            android:fontFamily="@font/nunito"
+            android:fontFamily="@font/nunito_semibold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

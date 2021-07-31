@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
@@ -22,11 +23,13 @@ import com.killerinstinct.kdeattendance.viewmodels.TakeAttendanceVMProviderFacto
 import com.killerinstinct.kdeattendance.viewmodels.TakeAttendanceViewModel
 import java.io.File
 import java.io.FileOutputStream
+import java.util.*
 
 class TakeAttendanceActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: TakeAttendanceViewModel
+    private lateinit var day: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,15 @@ class TakeAttendanceActivity : AppCompatActivity() {
 
         recyclerView = findViewById<RecyclerView>(R.id.TA_rec)
         setupRecyclerView()
+
+        //Date
+        var dateTime:String
+        var calender= Calendar.getInstance()
+        val listOfMonth:List<String> = listOf<String> ("January","February","March","April","May","June","July","August","September","October","November","December")
+        day=findViewById(R.id.day)
+        dateTime=""+calender.get(Calendar.DAY_OF_MONTH)+" "+listOfMonth[calender.get(Calendar.MONTH)]+", "+calender.get(
+            Calendar.YEAR)
+        day.setText(dateTime)
 
         val mainRepository = MainRepository(KDEdatabase(this,Utils.ALL_EMPLOYEES))
         val viewModelProviderFactory = TakeAttendanceVMProviderFactory(mainRepository)

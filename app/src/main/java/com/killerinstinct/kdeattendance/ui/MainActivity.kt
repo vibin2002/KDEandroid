@@ -28,7 +28,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var fab: Button
+    private lateinit var fab: TextView
     private lateinit var viewModel: MainViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var day:TextView
