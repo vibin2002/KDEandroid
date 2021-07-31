@@ -16,7 +16,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"/>
+            android:background="#c1c1c1"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -26,7 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="12dp"
+        android:fontFamily="@font/nunito"
+        android:layout_marginStart="30dp"
         android:paddingHorizontal="8dp"
         android:text="1"
         android:textSize="18sp"
@@ -40,9 +41,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingLeft="12dp"
+        android:textAlignment="center"
         android:text="John Snow"
+        android:textColor="@color/purple_200"
         android:textSize="18sp"
+        android:fontFamily="@font/nunito_semibold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_category"
         app:layout_constraintStart_toEndOf="@+id/tv_eid"
@@ -53,8 +56,9 @@
         android:id="@+id/tv_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="30dp"
         android:text="Category"
+        android:fontFamily="@font/nunito"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

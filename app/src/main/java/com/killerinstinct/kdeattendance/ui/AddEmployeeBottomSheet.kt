@@ -36,7 +36,7 @@ class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
         if (spinner != null) {
             val adapter = ArrayAdapter(
                 dialog!!.context,
-                android.R.layout.simple_spinner_item,
+                android.R.layout.simple_dropdown_item_1line,
                 Utils.spinnerCategory
             )
             spinner.adapter = adapter
@@ -48,7 +48,7 @@ class AddEmployeeBottomSheet : BottomSheetDialogFragment() {
         viewModel = ViewModelProvider(requireActivity(), viewModelProviderFactory).get(MainViewModel::class.java)
 
         val editText = view.findViewById<EditText>(R.id.et_addemployee)
-        val addbtn = view.findViewById<Button>(R.id.btn_add)
+        val addbtn = view.findViewById<TextView>(R.id.btn_add)
 
         addbtn.setOnClickListener {
             val employeelist = editText.text?.split("\n")
