@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -80,9 +81,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelProviderFactory).get(MainViewModel::class.java)
 
         viewModel.employeeListLiveData.observe(this,{
-            recyclerView.adapter = MainRecyclerAdapter(it.sortedBy { employee ->
-                employee.id
-            })
+            recyclerView.adapter = MainRecyclerAdapter(it)
         })
 
         fab = findViewById(R.id.extendedFloatingActionButton)
